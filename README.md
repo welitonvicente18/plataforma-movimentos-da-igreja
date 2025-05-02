@@ -31,5 +31,5 @@ Este sistema tem como objetivo centralizar e facilitar o gerenciamento de evento
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/plataforma-movimentos.git
+   git clone https://github.com/seu-usuario/plataforma-movimentos-da-igreja.git
    cd plataforma-movimentos
