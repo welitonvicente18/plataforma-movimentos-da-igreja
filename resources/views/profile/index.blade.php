@@ -61,12 +61,12 @@
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="px-2 py-2 text-left">{{$user->name}}</td>
                             <td class="px-2 py-2">{{$user->email}}</td>
-                            <td class="px-2 py-2">{{$user->perfil->name}}</td>
+                            <td class="px-2 py-2">{{$user->perfil->name ?? '' }}</td>
                             <td class="px-2 py-2 text-center">
                                 <a href="{{ route('profile.edit', $user->id) }}">
-                                    <i class="bi bi-pencil-square fa-2x"></i>
+                                    <i class="bi bi-pencil-square text-3xl"></i>
                                 </a>
-                                <i class="bi bi-x-circle fa-2x text-[#f53003]"></i>
+                                <i class="bi bi-x-circle text-3xl text-[#f53003]"></i>
                             </td>
                         </tr>
                     @endforeach

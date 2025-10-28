@@ -29,60 +29,49 @@
                     @if(isset($member))
                         @method('PUT') <!-- Usando PUT para atualizar -->
                     @endif
-                    <div class="flex gap-4 p-2">
-                        <div class="p-2 flex-1">
-                            <div class="flex gap-4 flex-row">
-                                <div class="flex-1">
-                                    <x-input-label for="type" :value="__('Tipo de Integrante')" required/>
-                                    <x-select-tipo id="type" name="type"
-                                                   :selected="old('type',$member->type->value ?? '')"
-                                                   required onchange="hideTios()"/>
-                                    <x-input-error :messages="$errors->get('type')" class="mt-2"/>
-                                </div>
-                                <div class="flex-1">
-                                    <x-input-label for="status" :value="__('Situação')" required/>
-                                    <x-select-status id="status" name="status" class="w-full"
-                                                     :selected="old('status',$member->status->value ?? '')"
-                                                     required/>
-                                    <x-input-error :messages="$errors->get('status')" class="mt-2"/>
-                                </div>
+
+                    <div class="grid grid-cols-3 gap-4 mt-2">
+
+
+                        <div class="">
+                            <div>
+                                <x-input-label for="type" :value="__('Tipo de Integrante')" required/>
+                                <x-select-tipo id="type" name="type" class="mt-1"
+                                               :selected="old('type',$member->type->value ?? '')"
+                                               required onchange="hideTios()"/>
+                                <x-input-error :messages="$errors->get('type')" class="mt-2"/>
                             </div>
-                            <div class="flex gap-4 flex-row hide-tios">
-                                <div class="py-1 flex-1">
-                                    <x-input-label for="event" :value="__('Encontro')" required/>
-                                    <x-select-event id="event" name="event" class="w-full"
-                                                    :events="$events"
-                                                    :selected="old('event',$member->event ?? '')" required/>
-                                    <x-input-error :messages="$errors->get('event')" class="mt-2"/>
-                                </div>
-                                <div class="py-1 flex-1">
-                                    <x-input-label for="circle" :value="__('Circulo')"/>
-                                    <x-select-circle id="circle" name="circle" class="w-full"
-                                                     :selected="old('circle',$member->circle ?? '')"/>
-                                    <x-input-error :messages="$errors->get('circle')" class="mt-2"/>
-                                </div>
-                            </div>
-                            <div class="py-1 flex-1">
-                                <x-input-label for="name" :value="__('Nome')" required/>
-                                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
-                                              value="{{ old('name',$member->name ??'') }}" required autofocus/>
-                                <x-input-error :messages="$errors->get('name')" class="mt-2"/>
-                            </div>
-                            <div class="py-1 flex-1 hide-jovem">
-                                <x-input-label for="spouse" :value="__('Cônjuge')" />
-                                <x-text-input id="spouse" class="block mt-1 w-full" type="text" name="spouse"
-                                              value="{{ old('spouse',$member->spouse ??'') }}" autofocus/>
-                                <x-input-error :messages="$errors->get('spouse')" class="mt-2"/>
+                            <div class="hide-tios mt-1">
+                                <x-input-label for="event" :value="__('Encontro')" required/>
+                                <x-select-event id="event" name="event" class="w-full mt-1"
+                                                :events="$events"
+                                                :selected="old('event',$member->event ?? '')" required/>
+                                <x-input-error :messages="$errors->get('event')" class="mt-2"/>
                             </div>
                         </div>
+                        <div class="">
 
-                        <div class="p-2 flex flex-col items-center text-center">
+                            <div>
+                                <x-input-label for="status" :value="__('Situação')" required/>
+                                <x-select-status id="status" name="status" class="w-full mt-1"
+                                                 :selected="old('status',$member->status->value ?? '')"
+                                                 required/>
+                                <x-input-error :messages="$errors->get('status')" class="mt-2"/>
+                            </div>
+                            <div class="hide-tios mt-1">
+                                <x-input-label for="circle" :value="__('Circulo')"/>
+                                <x-select-circle id="circle" name="circle" class="w-full mt-1"
+                                                 :selected="old('circle',$member->circle ?? '')"/>
+                                <x-input-error :messages="$errors->get('circle')" class="mt-2"/>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
                             <div>
                                 <x-img
                                     src="{{ isset($member->photo) ? asset('/storage/members/photo/' . $member->photo ) : asset('storage/icones/avatar_sem_imagem.jpg') }}"
-                                    width="155px" height="230px" class="rounded-lg" accept="jpeg,png,jpg"/>
+                                    width="90px" height="230px" class="rounded-lg" accept="jpeg,png,jpg"/>
                             </div>
-                            <div class="mt-4 w-full max-w-xs">
+                            <div>
                                 <x-text-input id="photo" class="block mt-1 w-full" type="file" name="photo"
                                               value="{{ old('photo', $member->photo ?? '') }}"/>
                                 <x-input-error :messages="$errors->get('photo')" class="mt-2"/>
@@ -90,21 +79,37 @@
                         </div>
                     </div>
 
-                    <div class="flex w-full p-2">
-                        <div class="p-2 hide-tios">
+                    <div class="grid grid-cols-2 mt-4">
+                        <div>
+                            <x-input-label for="name" :value="__('Nome')" required/>
+                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
+                                          value="{{ old('name',$member->name ??'') }}" required autofocus/>
+                            <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+                        </div>
+                        <div class="hide-jovem">
+                            <x-input-label for="spouse" :value="__('Cônjuge')"/>
+                            <x-text-input id="spouse" class="block mt-1 w-full" type="text" name="spouse"
+                                          value="{{ old('spouse',$member->spouse ??'') }}" autofocus/>
+                            <x-input-error :messages="$errors->get('spouse')" class="mt-2"/>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 mt-4">
+                        <div class="hide-tios">
                             <x-input-label for="sex" :value="__('Sexo')" required/>
                             <x-select-sex id="sex" name="sex" class="w-full"
                                           :selected="old('sex',$member->sex ?? '')"
                                           required/>
                             <x-input-error :messages="$errors->get('sex')" class="mt-2"/>
                         </div>
-                        <div class="p-2">
+                        <div>
                             <x-input-label for="telephone" :value="__('Telefone')"/>
-                            <x-text-input id="telephone" class="block mt-1 w-full telephone" type="text" name="telephone"
+                            <x-text-input id="telephone" class="block mt-1 w-full telephone" type="text"
+                                          name="telephone"
                                           value="{{ old('telephone',$member->telephone ??'') }}" required/>
                             <x-input-error :messages="$errors->get('telephone')" class="mt-2"/>
                         </div>
-                        <div class="p-2">
+                        <div>
                             <x-input-label for="birth_date" :value="__('Data de Nascimento')"/>
                             <x-text-input id="birth_date" class="block mt-1 w-full" type="date"
                                           name="birth_date"
@@ -113,44 +118,42 @@
                             <x-input-error :messages="$errors->get('birth_date')" class="mt-2"/>
                         </div>
                     </div>
-                    <div class="flex p-2 hide-tios">
-                        <div class="p-2 flex-1">
+                    <div class="grid grid-cols-3 mt-4 hide-tios">
+                        <div>
                             <x-input-label for="batizado" :value="__('Batizado')"/>
                             <x-select-yes-no id="batizado" class="block mt-1 w-full" type="text" name="batizado"
                                              :selected="old('batizado',$member->batizado ?? '')"/>
                             <x-input-error :messages="$errors->get('batizado')" class="mt-2"/>
                         </div>
-                        <div class="p-2 flex-1">
+                        <div>
                             <x-input-label for="crismado" :value="__('Crismado')"/>
                             <x-select-yes-no id="crismado" class="block mt-1 w-full" type="text" name="crismado"
                                              :selected="old('crismado',$member->crismado ?? '')"/>
                             <x-input-error :messages="$errors->get('crismado')" class="mt-2"/>
                         </div>
-                        <div class="p-2 flex-1">
-                        </div>
                     </div>
-                    <div class="flex p-2 ">
-                        <div class="p-2 flex-1">
+                    <div class="grid grid-cols-3 mt-4 ">
+                        <div>
 
                             <x-input-label for="UF" :value="__('UF')"/>
                             <x-select-uf id="uf" class="block mt-1 w-full" type="text" name="uf"
                                          :selected="old('uf',$member->uf ?? '')" required/>
                             <x-input-error :messages="$errors->get('uf')" class="mt-2"/>
                         </div>
-                        <div class="p-2 flex-1">
+                        <div>
                             <x-input-label for="city" :value="__('Cidade')"/>
                             <x-text-input id="city" class="block mt-1 w-full" type="text" name="city"
                                           value="{{ old('city',$member->city ??'') }}" required/>
                             <x-input-error :messages="$errors->get('city')" class="mt-2"/>
                         </div>
-                        <div class="p-2 flex-1">
+                        <div>
                             <x-input-label for="address" :value="__('Endereço')"/>
                             <x-text-input id="address" class="block mt-1 w-full" type="text" name="address"
                                           value="{{ old('address',$member->address ??'') }}" required/>
                             <x-input-error :messages="$errors->get('address')" class="mt-2"/>
                         </div>
                     </div>
-                    <div class="px-3">
+                    <div class="w-full">
                         <x-input-label for="observation" :value="__('Observação')"/>
                         <x-textarea name="observation"
                                     class="w-full">{{old('observation',$member->observation ?? '')}}</x-textarea>

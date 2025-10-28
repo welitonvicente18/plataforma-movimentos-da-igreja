@@ -64,9 +64,9 @@
                             <td class="px-2 py-2 text-center">{{$event->date_event->format('d/m/Y')}}</td>
                             <td class="px-2 py-2 text-center">
                                 <a href="{{ route('events.edit', $event->id) }}">
-                                    <i class="bi bi-pencil-square fa-2x"></i>
+                                    <i class="bi bi-pencil-square text-3xl"></i>
                                 </a>
-                                <i class="bi bi-x-circle fa-2x text-[#f53003]"></i>
+                                <i class="bi bi-x-circle text-3xl text-[#f53003]"></i>
                             </td>
                         </tr>
                     @endforeach

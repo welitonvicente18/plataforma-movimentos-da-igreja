@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\MemberExternal;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\MontagemController;
 use App\Http\Controllers\ProfileController;

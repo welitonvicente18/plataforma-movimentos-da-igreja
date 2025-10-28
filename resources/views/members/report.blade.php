@@ -82,7 +82,18 @@
                                 <td class="px-2 py-2 text-center">{{$member->city ?? ''}}</td>
                                 <td class="px-2 py-2 text-center">{{$member->address ?? ''}}</td>
                                 <td class="px-2 py-2 text-center">{{$member->observation ?? ''}}</td>
-                                <td class="px-2 py-2 text-center">{{$member->team ?? ''}}</td>
+                                <td class="px-2 py-2 text-left">
+                                    @php
+                                        $temaChecked = json_decode($member->team, true) ?? [];
+                                    @endphp
+                                    @foreach($events as $idEncontro => $event)
+                                        @foreach($teams as $team)
+                                            @if(isset($temaChecked[$event->id]) && array_key_exists($team->id, $temaChecked[$event->id]))
+                                                {{ $event->name }} - {{$team->name}}<br>
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
